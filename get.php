@@ -29,6 +29,7 @@ if ($result != null) {
 			'cabang' => $namacabang['nama'] ?? '',
 			'wilayah' => $namawilayah['nama'] ?? '',
 			'telp' => $row['telp'] ?? '',
+			'hapus' => '<button data-id="'.$row['id'].'" class="btn btn-danger btn-sm hapus">Hapus</button>',
 		];
   }
 } else {

@@ -33,6 +33,7 @@
 											<th>Wilayah</th>
 											<th>Cabang</th>											
 											<th>Telpon</th>
+											<th>Hapus</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -131,7 +132,8 @@
 				{data:'badan',name:'badan'},
 				{data:'wilayah',name:'wilayah'},
 				{data:'cabang',name:'cabang'},
-				{data:'telp',name:'telp'},				
+				{data:'telp',name:'telp'},
+				{data:'hapus',name:'hapus'},				
 			],
 			columnDefs: [
 		    { className: "text-center", targets: [0] },
@@ -247,6 +249,24 @@
 	    		}
 	    	}
 	    });
+		});
+
+		$(document).on('click', '.hapus', function(e){
+			e.preventDefault();			
+			var id = $(this).data('id');
+
+			if(confirm('Yakin hapus data?')){
+				$.ajax({
+					url: 'hapus.php',
+					type: 'POST',
+					data:{
+						id:id,
+					},
+					success:function(msg){
+						table.ajax.reload( null, false );
+					}
+				});
+			}			
 		});
 
 	});
