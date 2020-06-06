@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM users WHERE telp = ".$phone;
 $result = $conn->query($sql);
 
-if ($result != null) {
+if ($result->num_rows != null) {
 	echo json_encode(["success"=>"OK", "redir"=>$redirect]);
 } else {
 	echo json_encode(["success"=>"FALSE"]);

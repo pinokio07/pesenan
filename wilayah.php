@@ -16,7 +16,7 @@ $cabang = $datacabang->fetch_assoc();
 $sqlwilayah = "SELECT * FROM wilayah WHERE id=".$cabang['wilayah_id'];
 $result = $conn->query($sqlwilayah);
 
-if ($result != null) {
+if ($result->num_rows != null) {
 	$output = '';;
 	while($row = $result->fetch_assoc()) {
 		$output .= '<option value="'.$row['id'].'">'.$row['nama'].'</option>';		

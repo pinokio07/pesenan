@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM wilayah";
 $result = $conn->query($sql);
 
-if ($result != null) {
+if ($result->num_rows != null) {
 	$output = '<option>Pilih...</option>';;
 	while($row = $result->fetch_assoc()) {
 		$output .= '<option value="'.$row['id'].'">'.$row['nama'].'</option>';		

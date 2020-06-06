@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM users";
 $result = $conn->query($sql);
 
-if ($result != null) {
+if ($result->num_rows != null) {
 	$data = [];
 	while($row = $result->fetch_assoc()) {
 		$sqlwilayah = "SELECT * FROM wilayah WHERE id=".$row['wilayah_id'];
