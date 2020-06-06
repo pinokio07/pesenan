@@ -57,17 +57,17 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	        <form>
+	        <form action="post.php" method="POST" class="form-php">
 	        	<div class="form-group row">
 					    <label for="nama" class="col-sm-2 col-form-label">Nama</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="nama" name="nama">
+					      <input type="text" class="form-control" id="nama" name="nama" required="required" minlength="4">
 					    </div>
 					  </div>
 					  <div class="form-group row">
 					    <label for="badan" class="col-sm-2 col-form-label">Badan</label>
 					    <div class="col-sm-8">
-					    	<select class="custom-select" id="badan" name="badan">
+					    	<select class="custom-select" id="badan" name="badan" required="required">
 					    		<option selected="selected" disabled="disabled">Pilih...</option>
 					    		<option value="Anshorulloh">Anshorulloh</option>
 					    		<option value="Khuddam">Khuddam</option>
@@ -78,25 +78,32 @@
 					  <div class="form-group row">
 					    <label for="wilayah" class="col-sm-2 col-form-label">Wilayah</label>
 					    <div class="col-sm-8">
-					    	<select class="select2bs4" id="wilayah" name="wilayah" style="width: 100%;"></select>
+					    	<select class="select2bs4" id="wilayah" name="wilayah" style="width: 100%;" required="required"></select>
 					    </div>
 					  </div>
 					  <div class="form-group row">
 					    <label for="cabang" class="col-sm-2 col-form-label">Cabang</label>
 					    <div class="col-sm-8">
-					    	<select class="select2bs4" id="cabang" name="cabang" style="width: 100%;"></select>
+					    	<select class="select2bs4" id="cabang" name="cabang" style="width: 100%;" required="required"></select>
 					    </div>					    
 					  </div>
 					  <div class="form-group row">
 					    <label for="telp" class="col-sm-2 col-form-label">Telepon</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="telp" name="telp">
+					      <input type="text" class="form-control" id="telp" name="telp" required="required">
+					    </div>
+					  </div>
+					  <div class="form-group row">
+					    <label for="ket" class="col-sm-2 col-form-label">Keterangan</label>
+					    <div class="col-sm-10">
+					    	<textarea class="form-control" id="ket" name="ket" cols="3"></textarea>					      
+					      <small id="phoneHelp" class="form-text text-danger info-message"></small>
 					    </div>
 					  </div>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-	        <button type="button" class="btn btn-primary">Simpan</button>
+	        <button type="submit" class="btn btn-primary">Simpan</button>
 	      </div>
 	      	</form>
 	    </div>
@@ -203,6 +210,43 @@
 					}
 				});
 			}			
+		});
+
+		$('#telp').keyup(function(){
+			var val = $(this).val();
+
+			$.ajax({
+				url: 'cektelp.php',
+				type: 'POST',
+				data: {
+					val:val,
+				},
+				success:function(msg){
+
+				}
+			});
+		});
+
+		$('form.form-php').submit(function(e){
+			e.preventDefault();
+			var str = $(this).serialize();
+			var this_form = $(this);
+			var action = $(this).attr('action');
+
+			$.ajax({
+	    	type: "POST",
+	    	url: action,
+	    	data: str,
+	    	success:function(msg){	    		
+	    		var hasil = JSON.parse(msg);
+	    		if (hasil.success === 'OK') {
+	    			table.ajax.reload( null, false );
+	    			$('#modalTambah').modal('hide');
+	    		} else {
+	    			this_form.find('.info-message').slideDown().html(hasil.gagal);
+	    		}
+	    	}
+	    });
 		});
 
 	});
