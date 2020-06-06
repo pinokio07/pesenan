@@ -215,7 +215,7 @@
 			}			
 		});
 
-		$('#telp').keyup(function(){
+		$('#telp').on('keyup keypress blur', function(){
 			var val = $(this).val();
 
 			$.ajax({
