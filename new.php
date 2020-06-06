@@ -58,7 +58,7 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	        <form action="post.php" method="POST" class="form-php">
+	        <form action="post.php" method="POST" class="form-php" id="form-php">
 	        	<div class="form-group row">
 					    <label for="nama" class="col-sm-2 col-form-label">Nama</label>
 					    <div class="col-sm-10">
@@ -247,8 +247,8 @@
 	    	success:function(msg){	    		
 	    		var hasil = JSON.parse(msg);
 	    		if (hasil.success === 'OK') {
-	    			table.ajax.reload( null, false );
-	    			this_form.find("input:not(input[type=submit]), textarea").val('');
+	    			table.ajax.reload( null, false );	    			
+	    			document.getElementById("form-php").reset();
 	    			$('#modalTambah').modal('hide');
 	    		} else {
 	    			this_form.find('.info-message').slideDown().html(hasil.gagal);
