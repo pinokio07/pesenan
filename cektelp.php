@@ -12,10 +12,10 @@ $telp = $conn->real_escape_string($_POST['val']);
 $sql = "SELECT * FROM users WHERE telp = ".$telp;
 $result = $conn->query($sql);
 
-if ($result != null) {
-  echo json_encode(["success"=>"FALSE"]);
+if ($result->num_rows > 0) {
+  echo "GAGAL";
 } else {
-  echo json_encode(["success"=>"OK"]);
+  echo "OK";
 }
 
 $conn->close();

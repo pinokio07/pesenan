@@ -92,6 +92,7 @@
 					    <label for="telp" class="col-sm-2 col-form-label">Telepon</label>
 					    <div class="col-sm-10">
 					      <input type="text" class="form-control" id="telp" name="telp" required="required">
+					      <small id="phoneCek" class="form-text text-danger phone-check"></small>
 					    </div>
 					  </div>
 					  <div class="form-group row">
@@ -104,7 +105,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-	        <button type="submit" class="btn btn-primary">Simpan</button>
+	        <button type="submit" class="btn btn-primary simpan">Simpan</button>
 	      </div>
 	      	</form>
 	    </div>
@@ -224,7 +225,11 @@
 					val:val,
 				},
 				success:function(msg){
-
+					if (msg === "GAGAL") {
+						$('.phone-check').slideDown().html('Nomor yang anda masukkan sudah dipakai');
+					} else {
+						$('.phone-check').slideUp();
+					}
 				}
 			});
 		});
