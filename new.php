@@ -70,7 +70,7 @@
 					    <div class="col-sm-8">
 					    	<select class="custom-select" id="badan" name="badan" required="required">
 					    		<option selected="selected" disabled="disabled">Pilih...</option>
-					    		<option value="Anshorulloh">Anshorulloh</option>
+					    		<option value="Ansharullah">Anshorullah</option>
 					    		<option value="Khuddam">Khuddam</option>
 					    		<option value="Lajnah Imaillah">Lajnah Imaillah</option>
 					    	</select>					      
@@ -248,6 +248,7 @@
 	    		var hasil = JSON.parse(msg);
 	    		if (hasil.success === 'OK') {
 	    			table.ajax.reload( null, false );
+	    			this_form.find("input:not(input[type=submit]), textarea").val('');
 	    			$('#modalTambah').modal('hide');
 	    		} else {
 	    			this_form.find('.info-message').slideDown().html(hasil.gagal);
